@@ -55,6 +55,5 @@ int main(int argc, char **argv)
       exit(0);
 
     write(1, buf, bytes);               /* write to standard output */
-    fatal(char *string)
   }
 }
