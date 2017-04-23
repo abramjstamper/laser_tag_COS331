@@ -12,7 +12,7 @@
 #define SERVER_PORT 12345         /* arbitrary, but client & server must agree */
 #define BUF_SIZE 4096             /* block transfer size */
 
-void fatal(char *string){
+void fatal(char string[]){
   printf("%s\n", string);
   exit(1);
 }

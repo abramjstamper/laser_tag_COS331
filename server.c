@@ -14,7 +14,7 @@
 #define BUF_SIZE 4096                       /* block transfer size */
 #define QUEUE_SIZE 10
 
-void fatal(char *string){
+void fatal(char string[]){
   printf("%s\n", string);
   exit(1);
 }
