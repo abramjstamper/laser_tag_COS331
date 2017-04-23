@@ -5,19 +5,16 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
-#define SERVER PORT 12345 #define BUF SIZE 4096
+#define SERVER_PORT 12345         /* arbitrary, but client & server must agree */
+#define BUF_SIZE 4096             /* block transfer size */
 
 int main(int argc, char **argv)
 {
-
   int c, s, bytes;
-  char buf[BUF SIZE];
-  struct hostent *h;
-  struct sockaddr in channel;
-
-  /* arbitrary, but client & server must agree */ /* block transfer size */
-  /* buffer for incoming file */		  /* info about server */
-						  /* holds IP address */
+  char buf[BUF_SIZE];             /* buffer for incoming file */		
+  struct hostent *h;              /* info about server */
+  struct sockaddr in_channel;     /* holds IP address */    
+						 
   if (argc != 3)
     fatal("Usage: client server-name file-name");
 
@@ -25,36 +22,35 @@ int main(int argc, char **argv)
   if (!h)
     fatal("gethostbyname failed");
 
-  s = socket(PF INET, SOCK STREAM, IPPROTO TCP);
+  s = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
 
   if (s < 0)
     fatal("socket");
 
   memset(&channel, 0, sizeof(channel));
-  channel.sin family = AF INET;
-  memcpy(&channel.sin addr.s addr, h->h addr, h->h length);
-  channel.sin port = htons(SERVER PORT);
+  channel.sin_family = AF_INET;
+  memcpy(&channel.sin_addr.s_addr, h->h_addr, h->h_length);
+  channel.sin_port = htons(SERVER_PORT);
 
   c = connect(s, (struct sockaddr *)&channel, sizeof(channel));
   if (c < 0)
     fatal("connect failed");
   /* Connection is now established. Send file name including 0 byte at end. */
-
   write(s, argv[2], strlen(argv[2]) + 1);
-  /* Go get the file and write it to standard output. */ while (1)
+
+  /* Go get the file and write it to standard output. */
+  while (true)
   {
-    bytes = read(s, buf, BUF SIZE);
-    if (bytes <= 0)
+    bytes = read(s, buf, BUF_SIZE);     /* read from socket */
+    if (bytes <= 0)                     /* check for end of file */
       exit(0);
 
-    write(1, buf, bytes);
+    write(1, buf, bytes);               /* write to standard output */
     fatal(char *string)
-    {
-      printf("%s\n", string);
-      /* read from socket */
-      /* check for end of file */
-      /* write to standard output */
-    }
   }
+}
+
+void fatal(char *string){
+  printf("%s\n", string);
   exit(1);
 }
