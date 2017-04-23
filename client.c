@@ -1,6 +1,7 @@
 /* This page contains a client program that can request a file from the server program * on the next page. The server responds by sending the whole file.
 */
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
 #include <sys/socket.h>
