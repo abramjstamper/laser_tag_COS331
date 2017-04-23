@@ -22,7 +22,7 @@ int main(int argc, char **argv)
   int c, s, bytes;
   char buf[BUF_SIZE];             /* buffer for incoming file */		
   struct hostent *h;              /* info about server */
-  struct sockaddr in_channel;     /* holds IP address */    
+  struct sockaddr_in channel;     /* holds IP address */    
 						 
   if (argc != 3)
     fatal("Usage: client server-name file-name");
