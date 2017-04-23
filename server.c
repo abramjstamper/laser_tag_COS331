@@ -11,6 +11,11 @@
 #define BUF_SIZE 4096                       /* block transfer size */
 #define QUEUE_SIZE 10
 
+void fatal(char *string){
+  printf("%s\n", string);
+  exit(1);
+}
+
 int main(int argc, char *argv[])
 {
   int s, b, l, fd, sa, bytes, on = 1;
@@ -63,9 +68,4 @@ int main(int argc, char *argv[])
     close(fd);                          /* close file */
     close(sa);                          /* close connection */
   }
-}
-
-void fatal(char *string){
-  printf("%s\n", string);
-  exit(1);
 }

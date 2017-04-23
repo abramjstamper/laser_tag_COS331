@@ -9,6 +9,11 @@
 #define SERVER_PORT 12345         /* arbitrary, but client & server must agree */
 #define BUF_SIZE 4096             /* block transfer size */
 
+void fatal(char *string){
+  printf("%s\n", string);
+  exit(1);
+}
+
 int main(int argc, char **argv)
 {
   int c, s, bytes;
@@ -49,9 +54,4 @@ int main(int argc, char **argv)
     write(1, buf, bytes);               /* write to standard output */
     fatal(char *string)
   }
-}
-
-void fatal(char *string){
-  printf("%s\n", string);
-  exit(1);
 }
