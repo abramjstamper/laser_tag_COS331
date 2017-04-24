@@ -55,6 +55,7 @@ int main(int argc, char *argv[])
       fatal("accept failed");
 
     read(sa, buf, BUF_SIZE);                /* read file name from socket */
+    printf("%s\n", buf);
 
     /* Get and return the file. */
     fd = open(buf, O_RDONLY);               /* open the file to be sent back */
