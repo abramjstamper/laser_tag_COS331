@@ -1,6 +1,0 @@
-{
-  teamID: 1,
-  gunID: 1,
-  contestStart: xx:xx,
-  contestLength: 60
-}
