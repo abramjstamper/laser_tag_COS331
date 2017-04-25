@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
   while (true)
   {
     printf("Server is running!\n");
-    printf("Contest will begin on Saturday 4/29/17 at 12pm ESt!\n");
+    printf("Contest will begin on Saturday 4/29/17 at 12pm EST!\n");
     time_t startTime = 1493481600;
     sa = accept(s, 0, 0);                    /* block for connection request */
     
@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
       bytes = read(fd, buf, BUF_SIZE);  /* read from file */
       if (bytes <= 0)                   /* check for end of file */
         break;
-      printf("%s\n", bytes);
+      printf("%s\n", buf);
       write(sa, buf, bytes);            /* write bytes to socket */
     }
     close(fd);                          /* close file */
