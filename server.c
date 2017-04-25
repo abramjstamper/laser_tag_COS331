@@ -51,12 +51,11 @@ int main(int argc, char *argv[])
   while (true)
   {
     printf("Server is running!\n");
-    printf("Contest will run in 60 seconds!\n");
+    printf("Contest will begin in 60 seconds!\n");
     time_t contestStarts = time(NULL);
     time_t currentTime = contestStarts;
-    contestStarts+=60;
-    
-    printf("Current Time Time formated %s\n", ctime(&contestStarts));
+    contestStarts.tm_min+=1;
+    printf("Current Time Time formated %s", ctime(&contestStarts));
     printf("Contest Start Time formated %s\n", ctime(&contestStarts));
     sa = accept(s, 0, 0);                    /* block for connection request */
     
