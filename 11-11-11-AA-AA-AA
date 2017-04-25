@@ -1,6 +1,6 @@
 {
   teamID: 1,
   gunID: 1,
-  contestStart: xx:xx,
+   contestStart: 1493481600,
   contestLength: 600
 }

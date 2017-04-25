@@ -9,7 +9,6 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
-#include <time.h>
 
 #define SERVER_PORT 12345                   /* arbitrary, but client & server must agree */
 #define BUF_SIZE 4096                       /* block transfer size */
@@ -47,12 +46,12 @@ int main(int argc, char *argv[])
   if (l < 0)
     fatal("listen failed");
 
-  /* Socket is now set up and bound. Wait for connection and process it. */
-  while (true)
-  {
     printf("Server is running!\n");
     printf("Contest will begin on Saturday 4/29/17 at 12pm EST!\n");
-    time_t startTime = 1493481600;
+
+  /* Socket is now set up and bound. Wait for connection and process it. */
+  while (true)
+  { 
     sa = accept(s, 0, 0);                    /* block for connection request */
     
     if (sa < 0)
@@ -71,10 +70,10 @@ int main(int argc, char *argv[])
       bytes = read(fd, buf, BUF_SIZE);  /* read from file */
       if (bytes <= 0)                   /* check for end of file */
         break;
-      printf("%s\n", buf);
       write(sa, buf, bytes);            /* write bytes to socket */
     }
     close(fd);                          /* close file */
     close(sa);                          /* close connection */
+    printf("Successful sent data to client\n");
   }
 }
