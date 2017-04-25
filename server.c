@@ -50,6 +50,14 @@ int main(int argc, char *argv[])
   /* Socket is now set up and bound. Wait for connection and process it. */
   while (true)
   {
+    printf("Server is running!\n");
+    printf("Contest will run in 60 seconds!\n");
+    time_t contestStarts = time(NULL);
+    time_t currentTime = contestStarts;
+    contestStarts+=60;
+    
+    printf("Current Time Time formated %s\n", ctime(&contestStarts));
+    printf("Contest Start Time formated %s\n", ctime(&contestStarts));
     sa = accept(s, 0, 0);                    /* block for connection request */
     
     if (sa < 0)
@@ -68,9 +76,6 @@ int main(int argc, char *argv[])
       bytes = read(fd, buf, BUF_SIZE);  /* read from file */
       if (bytes <= 0)                   /* check for end of file */
         break;
-      time_t currentTime = time(NULL);
-      printf("Current Time in seconds %s\n", currentTime);
-      printf("Current Time formated %s\n", ctime(&currentTime));
       write(sa, buf, bytes);            /* write bytes to socket */
     }
     close(fd);                          /* close file */
