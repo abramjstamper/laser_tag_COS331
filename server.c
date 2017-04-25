@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
     printf("Server is running!\n");
     printf("Contest will begin in 60 seconds!\n");
     time_t contestStarts = time(NULL);
-    time_t currentTime = contestStarts;
+    time_t currentTime = time(NULL);
     contestStarts += 60;
     printf("Current Time Time formated %s", ctime(&contestStarts));
     printf("Contest Start Time formated %s\n", ctime(&contestStarts));
