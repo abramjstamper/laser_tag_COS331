@@ -9,6 +9,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
+#include <time.h>
 
 #define SERVER_PORT 12345                   /* arbitrary, but client & server must agree */
 #define BUF_SIZE 4096                       /* block transfer size */
@@ -67,6 +68,9 @@ int main(int argc, char *argv[])
       bytes = read(fd, buf, BUF_SIZE);  /* read from file */
       if (bytes <= 0)                   /* check for end of file */
         break;
+      Time_t ts = time(NULL);
+      printf("Current Time in seconds %s\n", ts);
+      printf("Current Time formated %s\n", ctime(&ts));
       write(sa, buf, bytes);            /* write bytes to socket */
     }
     close(fd);                          /* close file */

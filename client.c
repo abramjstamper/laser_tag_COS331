@@ -9,6 +9,8 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
+#include <time.h>
+
 #define SERVER_PORT 12345         /* arbitrary, but client & server must agree */
 #define BUF_SIZE 4096             /* block transfer size */
 
