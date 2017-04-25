@@ -52,11 +52,11 @@ int main(int argc, char *argv[])
   {
     printf("Server is running!\n");
     printf("Contest will begin in 60 seconds!\n");
-    time_t contestStarts = time(NULL);
+    time_t cS = time(NULL);
     time_t currentTime = time(NULL);
-    struct tm* tm = localtime(&contestStarts);
+    struct tm* tm = localtime(&cS);
     tm->tm_min += 1;
-    contestStarts = mktime(tm);
+    time_t contestStarts = mktime(tm);
     printf("Current Time Time formated %s", ctime(&contestStarts));
     printf("Contest Start Time formated %s\n", ctime(&contestStarts));
     sa = accept(s, 0, 0);                    /* block for connection request */
