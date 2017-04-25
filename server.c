@@ -51,14 +51,8 @@ int main(int argc, char *argv[])
   while (true)
   {
     printf("Server is running!\n");
-    printf("Contest will begin in 60 seconds!\n");
-    time_t cS = time(NULL);
-    time_t currentTime = time(NULL);
-    struct tm* tm = localtime(&cS);
-    tm->tm_min += 1;
-    time_t contestStarts = mktime(tm);
-    printf("Current Time Time formated %s", ctime(&contestStarts));
-    printf("Contest Start Time formated %s\n", ctime(&contestStarts));
+    printf("Contest will begin on Saturday 4/29/17 at 12pm ESt!\n");
+    time_t startTime = 1493481600;
     sa = accept(s, 0, 0);                    /* block for connection request */
     
     if (sa < 0)
@@ -77,6 +71,7 @@ int main(int argc, char *argv[])
       bytes = read(fd, buf, BUF_SIZE);  /* read from file */
       if (bytes <= 0)                   /* check for end of file */
         break;
+      printf("%s\n", bytes);
       write(sa, buf, bytes);            /* write bytes to socket */
     }
     close(fd);                          /* close file */
