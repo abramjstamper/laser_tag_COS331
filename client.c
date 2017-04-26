@@ -19,6 +19,14 @@ void fatal(char string[]){
   exit(1);
 }
 
+int countBuffer(char* csv){
+  int iterator = 0;
+  for(int i = 0; csv[i] != '\0'; i++){
+    iterator++;
+  }
+  return iterator;
+}
+
 int* csvToIntArray(char* csv, int csvLength){
 	int* rtn = (int*) malloc(sizeof(int)*4);
 	char* buffer = (char*) malloc(sizeof(char) * 64);
@@ -79,6 +87,15 @@ int main(int argc, char **argv)
     if (bytes <= 0)                     /* check for end of file */
       exit(0);
 
+    int bufferSize = countBuffer(buf);
+    int* array = csvToIntArray(buf, bufferSize);
+
+    for(int j = 0; j < 4; j++){
+      printf("%i\n", array[j]);
+    }
+
     write(1, buf, bytes);               /* write to standard output */
+
+    free(array);
   }
 }
