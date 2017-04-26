@@ -27,18 +27,19 @@ int countBuffer(char* csv){
   return iterator;
 }
 
-int* csvToIntArray(char* csv, int csvLength){
+int* csvToIntArray(char* csv){
 	int* rtn = (int*) malloc(sizeof(int)*4);
 	char* buffer = (char*) malloc(sizeof(char) * 64);
 	int rtnIndex = 0;
 	int bufIndex = 0;
-	for(int i = 0; i < csvLength; i++){
+	for(int i = 0; rtnIndex < 4; i++){
 		if(csv[i] == ','){
 			rtn[rtnIndex] = atoi(buffer);
 			rtnIndex++;
-			for(int j = 0; j<64;j++){
-				buffer[j] == '\0';
-			}
+			
+			free(buffer);
+			buffer = (char*) malloc(sizeof(char) * 64);
+			
 			bufIndex = 0;
 		}
 		else{
@@ -87,9 +88,7 @@ int main(int argc, char **argv)
     if (bytes <= 0)                     /* check for end of file */
       exit(0);
 
-    int bufferSize = countBuffer(buf);
-	 printf("%i", bufferSize);
-    int* array = csvToIntArray(buf, bufferSize);
+    int* array = csvToIntArray(buf);
 
     for(int j = 0; j < 4; j++){
       printf("%i\n", array[j]);
