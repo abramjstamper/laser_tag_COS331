@@ -88,6 +88,7 @@ int main(int argc, char **argv)
       exit(0);
 
     int bufferSize = countBuffer(buf);
+	 printf("%i", bufferSize);
     int* array = csvToIntArray(buf, bufferSize);
 
     for(int j = 0; j < 4; j++){
