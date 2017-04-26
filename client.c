@@ -27,6 +27,15 @@ int countBuffer(char* csv){
   return iterator;
 }
 
+int secondsUntilTime(int t){
+	time_t currentTime = time(NULL);
+	if(currentTime > t){
+		return 0;
+	} else {
+		return (t - currentTime);
+	}
+}
+
 int* csvToIntArray(char* csv){
 	int* rtn = (int*) malloc(sizeof(int)*4);
 	char* buffer = (char*) malloc(sizeof(char) * 64);
@@ -49,6 +58,16 @@ int* csvToIntArray(char* csv){
 	}
 	free(buffer);
 	return rtn;
+}
+
+void output(int* input){
+	printf("Team ID: %d\n", input[0]);
+	printf("Gun ID:  %d\n", input[1]);
+	time_t contestStart = input[2];
+	printf("Contest Starts: %s", ctime(&contestStart));
+	printf("Contest Length: %d minutes\n", (input[3]/60));
+	printf("Time Until Contest Starts: %d minutes %d seconds\n",secondsUntilTime(input[2])/60, secondsUntilTime(input[2])%60);
+	printf("Time Until Contest Ends:   %d minutes %d seconds\n",secondsUntilTime(input[2] + input[3])/60, secondsUntilTime(input[2] + input[3])%60);
 }
 
 int main(int argc, char **argv)
@@ -89,12 +108,10 @@ int main(int argc, char **argv)
       exit(0);
 
     int* array = csvToIntArray(buf);
+	 
+	 output(array);
 
-    for(int j = 0; j < 4; j++){
-      printf("%i\n", array[j]);
-    }
-
-    write(1, buf, bytes);               /* write to standard output */
+   // write(1, buf, bytes);               /* write to standard output */
 
     free(array);
   }
